@@ -19,6 +19,7 @@ running the Extended Euclidian Algorithm by the following
 rules.
 
 x = (X * C - B * n)/GCD(A,B);
+
 y = (Y * C + A * n)/GCD(A,B);
 
 where X and Y is a particular solution to the equation given by
