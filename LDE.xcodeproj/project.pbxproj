@@ -15,6 +15,7 @@
 		C88D5DB91B154EAD00C3140F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C88D5DB81B154EAD00C3140F /* Images.xcassets */; };
 		C88D5DBC1B154EAD00C3140F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C88D5DBA1B154EAD00C3140F /* LaunchScreen.xib */; };
 		C88D5DC81B154EAD00C3140F /* LDETests.m in Sources */ = {isa = PBXBuildFile; fileRef = C88D5DC71B154EAD00C3140F /* LDETests.m */; };
+		C8EA44BB1B15A7800094DDC4 /* KZEuclideanAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = C8EA44BA1B15A7800094DDC4 /* KZEuclideanAlgorithm.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		C88D5DC11B154EAD00C3140F /* LDETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LDETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C88D5DC61B154EAD00C3140F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C88D5DC71B154EAD00C3140F /* LDETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDETests.m; sourceTree = "<group>"; };
+		C8EA44B91B15A7800094DDC4 /* KZEuclideanAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZEuclideanAlgorithm.h; sourceTree = "<group>"; };
+		C8EA44BA1B15A7800094DDC4 /* KZEuclideanAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZEuclideanAlgorithm.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				C88D5DB01B154EAD00C3140F /* MasterViewController.m */,
 				C88D5DB21B154EAD00C3140F /* DetailViewController.h */,
 				C88D5DB31B154EAD00C3140F /* DetailViewController.m */,
+				C8EA44B91B15A7800094DDC4 /* KZEuclideanAlgorithm.h */,
+				C8EA44BA1B15A7800094DDC4 /* KZEuclideanAlgorithm.m */,
 				C88D5DB51B154EAD00C3140F /* Main.storyboard */,
 				C88D5DB81B154EAD00C3140F /* Images.xcassets */,
 				C88D5DBA1B154EAD00C3140F /* LaunchScreen.xib */,
@@ -224,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8EA44BB1B15A7800094DDC4 /* KZEuclideanAlgorithm.m in Sources */,
 				C88D5DAE1B154EAD00C3140F /* AppDelegate.m in Sources */,
 				C88D5DB11B154EAD00C3140F /* MasterViewController.m in Sources */,
 				C88D5DAB1B154EAD00C3140F /* main.m in Sources */,
@@ -422,6 +428,7 @@
 				C88D5DCD1B154EAD00C3140F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C88D5DCE1B154EAD00C3140F /* Build configuration list for PBXNativeTarget "LDETests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +437,7 @@
 				C88D5DD01B154EAD00C3140F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
