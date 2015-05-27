@@ -31,6 +31,9 @@
 @end
 
 @implementation KZMainViewController
+
+#pragma mark - View Lifecyle
+
 - (void)awakeFromNib {
     [super awakeFromNib];
 }
@@ -64,7 +67,7 @@
     }
 }
 
-#pragma mark - UITalbleViewDelegate
+#pragma mark - UITalbleViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.reuseIdentifiers.count + 1;
@@ -354,39 +357,10 @@
     }
 }
 
-#pragma mark - IBAction
+#pragma mark - IBActions
 
 - (IBAction)aboutBarButton:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Extended_Euclidean_algorithm"]];
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
