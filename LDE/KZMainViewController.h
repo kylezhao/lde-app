@@ -1,5 +1,5 @@
 //
-//  MasterViewController.h
+//  KZMainViewController.h
 //  LDE
 //
 //  Created by Kyle Zhao on 5/26/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MasterViewController : UITableViewController <UITextFieldDelegate>
+@interface KZMainViewController : UITableViewController <UITextFieldDelegate>
 
 
 @end

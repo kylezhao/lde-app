@@ -1,16 +1,16 @@
 //
-//  MasterViewController.m
+//  KZMainViewController.m
 //  LDE
 //
 //  Created by Kyle Zhao on 5/26/15.
 //  Copyright (c) 2015 Kyle Zhao. All rights reserved.
 //
 
-#import "MasterViewController.h"
-#import "DetailViewController.h"
+#import "KZMainViewController.h"
+#import "KZCalculationsViewController.h"
 #import "KZEuclideanAlgorithm.h"
 
-@interface MasterViewController ()
+@interface KZMainViewController ()
 @property (strong, nonatomic) NSArray *reuseIdentifiers;
 @property (strong, nonatomic) NSMutableArray *algorithmCalculations;
 @property (strong, nonatomic) NSMutableArray *evaluationCalculations;
@@ -30,7 +30,7 @@
 @property (assign, nonatomic) long long gcdParam;
 @end
 
-@implementation MasterViewController
+@implementation KZMainViewController
 - (void)awakeFromNib {
     [super awakeFromNib];
 }

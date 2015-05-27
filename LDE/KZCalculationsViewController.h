@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  KZCalculationsViewController.h
 //  LDE
 //
 //  Created by Kyle Zhao on 5/26/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController <UITableViewDataSource>
+@interface KZCalculationsViewController : UIViewController <UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *algorithmCalculations;
 

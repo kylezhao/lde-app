@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		C88D5DAB1B154EAD00C3140F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C88D5DAA1B154EAD00C3140F /* main.m */; };
 		C88D5DAE1B154EAD00C3140F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C88D5DAD1B154EAD00C3140F /* AppDelegate.m */; };
-		C88D5DB11B154EAD00C3140F /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C88D5DB01B154EAD00C3140F /* MasterViewController.m */; };
-		C88D5DB41B154EAD00C3140F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C88D5DB31B154EAD00C3140F /* DetailViewController.m */; };
+		C88D5DB11B154EAD00C3140F /* KZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C88D5DB01B154EAD00C3140F /* KZMainViewController.m */; };
+		C88D5DB41B154EAD00C3140F /* KZCalculationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C88D5DB31B154EAD00C3140F /* KZCalculationsViewController.m */; };
 		C88D5DB71B154EAD00C3140F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C88D5DB51B154EAD00C3140F /* Main.storyboard */; };
 		C88D5DB91B154EAD00C3140F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C88D5DB81B154EAD00C3140F /* Images.xcassets */; };
 		C88D5DBC1B154EAD00C3140F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C88D5DBA1B154EAD00C3140F /* LaunchScreen.xib */; };
@@ -34,10 +34,10 @@
 		C88D5DAA1B154EAD00C3140F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C88D5DAC1B154EAD00C3140F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C88D5DAD1B154EAD00C3140F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C88D5DAF1B154EAD00C3140F /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		C88D5DB01B154EAD00C3140F /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		C88D5DB21B154EAD00C3140F /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		C88D5DB31B154EAD00C3140F /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		C88D5DAF1B154EAD00C3140F /* KZMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KZMainViewController.h; sourceTree = "<group>"; };
+		C88D5DB01B154EAD00C3140F /* KZMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KZMainViewController.m; sourceTree = "<group>"; };
+		C88D5DB21B154EAD00C3140F /* KZCalculationsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KZCalculationsViewController.h; sourceTree = "<group>"; };
+		C88D5DB31B154EAD00C3140F /* KZCalculationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KZCalculationsViewController.m; sourceTree = "<group>"; };
 		C88D5DB61B154EAD00C3140F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C88D5DB81B154EAD00C3140F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C88D5DBB1B154EAD00C3140F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -89,10 +89,10 @@
 			children = (
 				C88D5DAC1B154EAD00C3140F /* AppDelegate.h */,
 				C88D5DAD1B154EAD00C3140F /* AppDelegate.m */,
-				C88D5DAF1B154EAD00C3140F /* MasterViewController.h */,
-				C88D5DB01B154EAD00C3140F /* MasterViewController.m */,
-				C88D5DB21B154EAD00C3140F /* DetailViewController.h */,
-				C88D5DB31B154EAD00C3140F /* DetailViewController.m */,
+				C88D5DAF1B154EAD00C3140F /* KZMainViewController.h */,
+				C88D5DB01B154EAD00C3140F /* KZMainViewController.m */,
+				C88D5DB21B154EAD00C3140F /* KZCalculationsViewController.h */,
+				C88D5DB31B154EAD00C3140F /* KZCalculationsViewController.m */,
 				C8EA44B91B15A7800094DDC4 /* KZEuclideanAlgorithm.h */,
 				C8EA44BA1B15A7800094DDC4 /* KZEuclideanAlgorithm.m */,
 				C88D5DB51B154EAD00C3140F /* Main.storyboard */,
@@ -231,9 +231,9 @@
 			files = (
 				C8EA44BB1B15A7800094DDC4 /* KZEuclideanAlgorithm.m in Sources */,
 				C88D5DAE1B154EAD00C3140F /* AppDelegate.m in Sources */,
-				C88D5DB11B154EAD00C3140F /* MasterViewController.m in Sources */,
+				C88D5DB11B154EAD00C3140F /* KZMainViewController.m in Sources */,
 				C88D5DAB1B154EAD00C3140F /* main.m in Sources */,
-				C88D5DB41B154EAD00C3140F /* DetailViewController.m in Sources */,
+				C88D5DB41B154EAD00C3140F /* KZCalculationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

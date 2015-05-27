@@ -1,18 +1,18 @@
 //
-//  DetailViewController.m
+//  KZCalculationsViewController.m
 //  LDE
 //
 //  Created by Kyle Zhao on 5/26/15.
 //  Copyright (c) 2015 Kyle Zhao. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "KZCalculationsViewController.h"
 
-@interface DetailViewController ()
+@interface KZCalculationsViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
-@implementation DetailViewController
+@implementation KZCalculationsViewController
 
 #pragma mark - Managing the detail item
 
