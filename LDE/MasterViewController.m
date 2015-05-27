@@ -11,9 +11,9 @@
 #import "KZEuclideanAlgorithm.h"
 
 @interface MasterViewController ()
-@property (strong, nonatomic) NSMutableArray *objects;
 @property (strong, nonatomic) NSArray *reuseIdentifiers;
-@property (strong, nonatomic) NSArray *algorithmCalculations;
+@property (strong, nonatomic) NSMutableArray *algorithmCalculations;
+@property (strong, nonatomic) NSMutableArray *evaluationCalculations;
 @property (strong, nonatomic) UITextField *textFieldA;
 @property (strong, nonatomic) UITextField *textFieldB;
 @property (strong, nonatomic) UITextField *textFieldC;
@@ -22,6 +22,12 @@
 @property (strong, nonatomic) UILabel *labelGCD;
 @property (strong, nonatomic) UILabel *labelX;
 @property (strong, nonatomic) UILabel *labelY;
+@property (assign, nonatomic) long long aParam;
+@property (assign, nonatomic) long long bParam;
+@property (assign, nonatomic) long long cParam;
+@property (assign, nonatomic) long long xParam;
+@property (assign, nonatomic) long long yParam;
+@property (assign, nonatomic) long long gcdParam;
 @end
 
 @implementation MasterViewController
@@ -32,24 +38,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.reuseIdentifiers = @[@[@"aCell",@"bCell",@"cCell"],@[@"gcdCell",@"xCell",@"yCell"],@[@"fromCell",@"toCell"]];
-
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                           action:@selector(dissmissKeyboard:)];
+    self.algorithmCalculations = [[NSMutableArray alloc] init];
+    self.evaluationCalculations = [[NSMutableArray alloc] init];
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dissmissKeyboard:)];
     [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
-//- (void)insertNewObject:(id)sender {
-//    if (!self.objects) {
-//        self.objects = [[NSMutableArray alloc] init];
-//    }
-//    [self.objects insertObject:[NSDate date] atIndex:0];
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//}
 
 - (void) dissmissKeyboard:(id)sender{
     [self.tableView endEditing:YES];
@@ -74,8 +71,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == tableView.numberOfSections -1) {
-        return 1;//self.objects.count;
+    if (section == 3) {
+        return self.evaluationCalculations.count;
     } else {
         return [self.reuseIdentifiers[section] count];
     }
@@ -84,9 +81,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
 
-    if (indexPath.section == tableView.numberOfSections -1) {
+    if (indexPath.section == 3) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"workRow"];
-        cell.textLabel.text = @"work";
+        cell.textLabel.text = self.evaluationCalculations[indexPath.row];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:self.reuseIdentifiers[indexPath.section][indexPath.row]];
     }
@@ -145,9 +142,6 @@
             break;
     }
 
-
-    //NSDate *object = self.objects[indexPath.row];
-    //cell.textLabel.text = [object description];
     return cell;
 }
 
@@ -166,15 +160,6 @@
         return nil;
     }
 }
-
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        [self.objects removeObjectAtIndex:indexPath.row];
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-//    }
-//}
 
 #pragma mark - UITextFieldDelegate
 
@@ -208,17 +193,37 @@
 
     if (finalString.length == 0) {
         textField.text = @"";
+
+        if(textField == self.textFieldTo || textField == self.textFieldFrom) {
+            [self clearResultCells];
+        } else {
+            [self clear];
+        }
+
         return NO;
     }
 
     unichar firstChar = [finalString characterAtIndex:0];
-    if (firstChar == '-') {
-        if(finalString.length > 11) {
-            return NO;
+
+    if (textField == self.textFieldFrom || textField == self.textFieldTo) {
+        if (firstChar == '-') {
+            if(finalString.length > 3) {
+                return NO;
+            }
+        } else {
+            if(finalString.length > 2) {
+                return NO;
+            }
         }
     } else {
-        if(finalString.length > 10) {
-            return NO;
+        if (firstChar == '-') {
+            if(finalString.length > 11) {
+                return NO;
+            }
+        } else {
+            if(finalString.length > 10) {
+                return NO;
+            }
         }
     }
 
@@ -227,12 +232,9 @@
     return NO;
 }
 
-
 - (void)textFieldValueChanged:(UITextField *)textField {
-    if (textField == self.textFieldFrom) {
-        NSLog(@"From");
-    } else if (textField == self.textFieldTo) {
-        NSLog(@"To");
+    if (textField == self.textFieldFrom || textField == self.textFieldTo) {
+        [self performEvaluation];
     } else {
         [self performCalculation];
     }
@@ -243,19 +245,21 @@
     long long b = self.textFieldB.text.longLongValue;
     long long c = self.textFieldC.text.longLongValue;
     long long x, y, gcd;
-    NSArray *calculations;
 
     if (a==0 || b==0 || c==0) {
-        self.labelGCD.text = @"";
-        self.labelX.text = @"";
-        self.labelY.text = @"";
-        self.algorithmCalculations = nil;
+        [self clear];
+        [self clearResultCells];
         return;
     }
-    
-    if (kz_calculateLDE(llabs(a), llabs(b), c, &x, &y, &gcd, &calculations)) {
+    assert(self.algorithmCalculations);
+    if (kz_calculateLDE(llabs(a), llabs(b), c, &x, &y, &gcd, self.algorithmCalculations)) {
 
-        self.algorithmCalculations = calculations;
+        self.aParam = a;
+        self.bParam = b;
+        self.cParam = c;
+        self.xParam = x;
+        self.yParam = y;
+        self.gcdParam = gcd;
 
         if(kz_sign(a) != kz_sign(b)) {
             y = -y;
@@ -276,28 +280,86 @@
         NSLog(@"%@", [NSString stringWithFormat:@"y = (%lld) + (%lld)n",y*(c/gcd),a/gcd]);
         NSLog(@"%@", [NSString stringWithFormat:@"GCD(%lld,%lld) = %lld",a,b,gcd]);
 
-        //kz_evaluateLDE(-4, 4, a, b, c, x, y, gcd);
+        [self performEvaluation];
+
     } else {
         self.labelGCD.text = [NSString stringWithFormat:@"GCD(%lld,%lld) = %lld",a,b,gcd];
         self.labelX.text = @"No Solutions";
         self.labelY.text = [NSString stringWithFormat:@"%lld mod GCD(%lld,%lld) != 0",c,a,b];
+        [self clearResultCells];
     }
 }
 
+- (void)performEvaluation {
+    if(self.textFieldFrom.text.length > 0 && self.textFieldTo.text.length > 0 && self.aParam != 0) {
+        int from = self.textFieldFrom.text.intValue;
+        int to = self.textFieldTo.text.intValue;
 
+        if (from != 0 && to != 0 && from <= to) {
 
-//void test() {
-//
-//    long long a, b, c, x, y, gcd;
-//
-//    a = 64;
-//    b = -139;
-//    c = -7;
-//
-//    NSLog(@"%lldx + %lldy = %lld",a,b,c);
-//
-//
-//}
+            long long y = self.yParam;
+            long long c = self.cParam;
+            NSInteger oldEvalCalcCount = self.evaluationCalculations.count;
+
+            if(kz_sign(self.aParam) != kz_sign(self.bParam)) {
+                y = -y;
+            }
+            if(self.aParam < 0) {
+                c =-c;
+            }
+            kz_evaluateLDE(from, to, self.aParam, self.bParam, c, self.xParam, y, self.gcdParam, self.evaluationCalculations);
+
+            NSMutableArray *oldIndexPaths = [[NSMutableArray alloc] init];
+            NSMutableArray *newIndexPaths = [[NSMutableArray alloc] init];
+
+            for (int i = 0;i<oldEvalCalcCount;i++) {
+                [oldIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:3]];
+            }
+            for (int i = 0;i<self.evaluationCalculations.count;i++) {
+                [newIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:3]];
+            }
+
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:oldIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
+        }
+    }
+}
+
+- (void)clear {
+    self.aParam = 0;
+    self.bParam = 0;
+    self.cParam = 0;
+    self.xParam = 0;
+    self.yParam = 0;
+    self.gcdParam = 0;
+
+    self.labelGCD.text = @"";
+    self.labelX.text = @"";
+    self.labelY.text = @"";
+    [self.algorithmCalculations removeAllObjects];
+}
+
+- (void)clearResultCells {
+    if(self.evaluationCalculations.count > 0) {
+        NSMutableArray *oldIndexPaths = [[NSMutableArray alloc] init];
+        for (int i = 0;i<self.evaluationCalculations.count;i++) {
+            [oldIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:3]];
+        }
+        [self.evaluationCalculations removeAllObjects];
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:oldIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+    }
+}
+
+#pragma mark - IBAction
+
+- (IBAction)aboutBarButton:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Extended_Euclidean_algorithm"]];
+}
+
 @end
 
 

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 int kz_sign(long long x);
-NSArray* kz_evaluateLDE(int n1,int n2, long long a, long long b, long long c, long long X, long long Y, long long gcd);
-BOOL kz_calculateLDE(long long a, long long b, long long c, long long *xReturn, long long *yReturn, long long *gcdReturn, NSArray **calculationsReturn);
+void kz_evaluateLDE(int n1,int n2, long long a, long long b, long long c, long long X, long long Y, long long gcd, NSMutableArray *evaluationCalculations);
+BOOL kz_calculateLDE(long long a, long long b, long long c, long long *xReturn, long long *yReturn, long long *gcdReturn, NSMutableArray *algorithmCalculations);

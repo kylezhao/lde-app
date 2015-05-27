@@ -30,7 +30,13 @@ long long kz_llgcd(long long a, long long b) {
     return b < 0 ? -b : b;
 }
 
-NSArray* kz_evaluateLDE(int n1,int n2, long long a, long long b, long long c, long long X, long long Y, long long gcd) {
+void kz_evaluateLDE(int n1,int n2, long long a, long long b, long long c, long long X, long long Y, long long gcd,NSMutableArray *evaluationCalculations) {
+
+    if (evaluationCalculations) {
+        [evaluationCalculations removeAllObjects];
+    } else {
+        return;
+    }
 
     int from=n1;
     int to=n2;
@@ -38,20 +44,20 @@ NSArray* kz_evaluateLDE(int n1,int n2, long long a, long long b, long long c, lo
     long long x;
     long long y;
 
-    NSMutableArray *evaluations = [[NSMutableArray alloc] init];
-
     for(int n=from;n<=to;n++){
         x = (X*c-b*n)/gcd;
         y = (Y*c+a*n)/gcd;
         //                                                         a     x       b   y      a*x+b*y
-        [evaluations addObject:[NSString stringWithFormat:@"n=%i  %lld(%lld) + %lld(%lld) = %lld\n",n,a,x,b,y,a*x+b*y]];
+        [evaluationCalculations addObject:[NSString stringWithFormat:@"n=%i  %lld(%lld) + %lld(%lld) = %lld\n",n,a,x,b,y,a*x+b*y]];
     }
-    return evaluations;
 }
 
-BOOL kz_calculateLDE(long long a, long long b, long long c, long long *xReturn, long long *yReturn, long long *gcdReturn, NSArray **calculationsReturn) {
+BOOL kz_calculateLDE(long long a, long long b, long long c, long long *xReturn, long long *yReturn, long long *gcdReturn,  NSMutableArray *algorithmCalculations) {
 
-    NSMutableArray *calculations = [[NSMutableArray alloc] init];
+    if (algorithmCalculations) {
+        [algorithmCalculations removeAllObjects];
+    }
+
     BOOL swapped = NO;
     long long x=a;
     long long y=b;
@@ -103,7 +109,7 @@ BOOL kz_calculateLDE(long long a, long long b, long long c, long long *xReturn, 
 
     //NSLog(@"%lld*(%lld) + %lld*(%lld) =%lld\n",x0,a2,y0,b2,r);
     //printf("%lld*(%lld) + %lld*(%lld) =%lld\n",x0,a2,y0,b2,r);
-    [calculations addObject:[NSString stringWithFormat:@"%lld*(%lld) + %lld*(%lld) =%lld\n",x0,a2,y0,b2,r]];
+    [algorithmCalculations addObject:[NSString stringWithFormat:@"%lld*(%lld) + %lld*(%lld) =%lld\n",x0,a2,y0,b2,r]];
     //----------------initializer
 
 
@@ -128,14 +134,13 @@ BOOL kz_calculateLDE(long long a, long long b, long long c, long long *xReturn, 
 
         //NSLog(@"%lld*(%lld) + %lld*(%lld) =%lld\n",x0,a2,y0,b2,r);
         //printf("%lld*(%lld) + %lld*(%lld) =%lld\n",x0,a2,y0,b2,r);
-        [calculations addObject:[NSString stringWithFormat:@"%lld*(%lld) + %lld*(%lld) =%lld\n",x0,a2,y0,b2,r]];
+        [algorithmCalculations addObject:[NSString stringWithFormat:@"%lld*(%lld) + %lld*(%lld) =%lld\n",x0,a2,y0,b2,r]];
     }
     //----------------main loop
 
     *xReturn = swapped? b2 : a2;
     *yReturn = swapped? a2 : b2;
     *gcdReturn = gcd;
-    *calculationsReturn = calculations;
     
     //printf("S={%lld+%lldn + %lld-%lldn | nez}",x,y0/r,y,x0/r);
     
