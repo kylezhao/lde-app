@@ -47,7 +47,7 @@ determines that
 x = (12) - 2(n)
 y = (0) + 1(n)
 
-The app can also evaluate the solutions for n any range of n
+The app can also evaluate the solutions for any range of n
 say 1 to 6 in this case.
 
 n=1  2(10) + 4(1) = 24 : 10 Chickens, 1 rabbit
