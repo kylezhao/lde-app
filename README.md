@@ -49,11 +49,11 @@ y = (0) + 1(n)
 The app can also evaluate the solutions for n any range of n
 say 1 to 6 in this case.
 
-n=1  2(10) + 4(1) = 24 // 10 Chickens, 1 rabbit
+n=1  2(10) + 4(1) = 24 : 10 Chickens, 1 rabbit
 n=2  2(8) + 4(2) = 24
-n=3  2(6) + 4(3) = 24  // 6 Chickens, 3 rabbits
-n=4  2(4) + 4(4) = 24  
-n=5  2(2) + 4(5) = 24  // 2 Chickens, 5 rabbits
+n=3  2(6) + 4(3) = 24  : 6 Chickens, 3 rabbits
+n=4  2(4) + 4(4) = 24
+n=5  2(2) + 4(5) = 24  : 2 Chickens, 5 rabbits
 n=6  2(0) + 4(6) = 24
 
 Are all possible solutions to this problem
