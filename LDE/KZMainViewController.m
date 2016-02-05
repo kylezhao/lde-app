@@ -184,11 +184,20 @@
     NSCharacterSet *digits = [NSCharacterSet decimalDigitCharacterSet];
     NSCharacterSet *stringSet = [NSCharacterSet characterSetWithCharactersInString:string];
     if (![digits isSupersetOfSet:stringSet]) {
-        [[[UIAlertView alloc] initWithTitle:@"Numbers Only Please"
-                                   message:nil
-                                  delegate:nil
-                         cancelButtonTitle:@"Ok"
-                          otherButtonTitles:nil] show];
+
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Numbers Only Please"
+                                                                        message:nil
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
         return NO;
     }
 
